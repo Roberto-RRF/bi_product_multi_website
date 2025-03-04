@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ 	<record model="ir.ui.view" id="mass_update_product_form_view">
+        <field name="name">mass.update.product.form.view</field>
+        <field name="model">mass.update.product</field>
+        <field name='arch' type='xml'>
+            <form string="Mass update product form">
+                <group>
+                    <group>
+                        <field name="website_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Update" name="update_mass_product" type="object" class="btn-primary"/>
+                    <button string="Discard" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_mass_update_product_website" model="ir.actions.act_window">
+        <field name="name">Mass update product Website</field>
+        <field name="res_model">mass.update.product</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="bi_product_multi_website.mass_update_product_form_view"/>
+        <field name="groups_id" eval="[(4, ref('sales_team.group_sale_manager'))]"/>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_product_template"/>
+    </record>
+</odoo>
